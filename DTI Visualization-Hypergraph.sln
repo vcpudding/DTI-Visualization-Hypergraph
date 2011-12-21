@@ -1,0 +1,23 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DTI Visualization", "DTI Visualization\DTI Visualization.vcproj", "{174C32F6-311B-4E2A-A919-272761CC4140}"
+	GlobalSection(Qt) = preSolution
+		Integration = True
+	EndGlobalSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{174C32F6-311B-4E2A-A919-272761CC4140}.Debug|Win32.ActiveCfg = Debug|Win32
+		{174C32F6-311B-4E2A-A919-272761CC4140}.Debug|Win32.Build.0 = Debug|Win32
+		{174C32F6-311B-4E2A-A919-272761CC4140}.Release|Win32.ActiveCfg = Release|Win32
+		{174C32F6-311B-4E2A-A919-272761CC4140}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,216 @@
+<ui version="4.0" >
+ <class>DTIVisualizationClass</class>
+ <widget class="QMainWindow" name="DTIVisualizationClass" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>846</width>
+    <height>596</height>
+   </rect>
+  </property>
+  <property name="minimumSize" >
+   <size>
+    <width>600</width>
+    <height>0</height>
+   </size>
+  </property>
+  <property name="cursor" >
+   <cursorShape>ArrowCursor</cursorShape>
+  </property>
+  <property name="windowTitle" >
+   <string>DTIVisualization</string>
+  </property>
+  <widget class="QWidget" name="centralWidget" >
+   <layout class="QHBoxLayout" name="horizontalLayout" >
+    <property name="margin" >
+     <number>0</number>
+    </property>
+    <item>
+     <widget class="QTabWidget" name="tabWidget" >
+      <property name="currentIndex" >
+       <number>0</number>
+      </property>
+      <widget class="QWidget" name="volumeTab" >
+       <attribute name="title" >
+        <string>Volume Viewer</string>
+       </attribute>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menuBar" >
+   <property name="geometry" >
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>846</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuHelp" >
+    <property name="title" >
+     <string>Help</string>
+    </property>
+    <addaction name="actionTest" />
+   </widget>
+   <widget class="QMenu" name="menuFile" >
+    <property name="title" >
+     <string>File</string>
+    </property>
+    <addaction name="actionOpen_folder" />
+    <addaction name="separator" />
+    <addaction name="actionLoad_selected_series" />
+    <addaction name="actionFuse_with_current_series" />
+    <addaction name="separator" />
+    <addaction name="actionLoad_series_as_DTI" />
+    <addaction name="actionSave_tensor_field" />
+   </widget>
+   <widget class="QMenu" name="menuView" >
+    <property name="title" >
+     <string>View</string>
+    </property>
+    <addaction name="actionFolder_explorer" />
+   </widget>
+   <addaction name="menuFile" />
+   <addaction name="menuView" />
+   <addaction name="menuHelp" />
+  </widget>
+  <widget class="QToolBar" name="mainToolBar" >
+   <attribute name="toolBarArea" >
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak" >
+    <bool>false</bool>
+   </attribute>
+   <addaction name="actionOpen_folder" />
+   <addaction name="separator" />
+   <addaction name="actionLoad_selected_series" />
+   <addaction name="actionFuse_with_current_series" />
+   <addaction name="separator" />
+   <addaction name="actionLoad_series_as_DTI" />
+   <addaction name="actionSave_tensor_field" />
+  </widget>
+  <widget class="QStatusBar" name="statusBar" />
+  <widget class="QDockWidget" name="dockWidget" >
+   <property name="sizePolicy" >
+    <sizepolicy vsizetype="Preferred" hsizetype="Minimum" >
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="allowedAreas" >
+    <set>Qt::LeftDockWidgetArea</set>
+   </property>
+   <attribute name="dockWidgetArea" >
+    <number>1</number>
+   </attribute>
+   <widget class="QWidget" name="dockWidgetContents" >
+    <layout class="QVBoxLayout" name="verticalLayout" >
+     <property name="margin" >
+      <number>0</number>
+     </property>
+     <item>
+      <widget class="QTreeWidget" name="fileTreeWidget" >
+       <property name="autoExpandDelay" >
+        <number>-1</number>
+       </property>
+       <property name="itemsExpandable" >
+        <bool>false</bool>
+       </property>
+       <property name="headerHidden" >
+        <bool>true</bool>
+       </property>
+       <column>
+        <property name="text" >
+         <string>1</string>
+        </property>
+       </column>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <action name="actionOpen_folder" >
+   <property name="icon" >
+    <iconset>
+     <normaloff>Resources/Icons/bag.png</normaloff>Resources/Icons/bag.png</iconset>
+   </property>
+   <property name="text" >
+    <string>Open folder</string>
+   </property>
+  </action>
+  <action name="actionLoad_selected_series" >
+   <property name="enabled" >
+    <bool>false</bool>
+   </property>
+   <property name="icon" >
+    <iconset>
+     <normaloff>Resources/Icons/monitor.png</normaloff>Resources/Icons/monitor.png</iconset>
+   </property>
+   <property name="text" >
+    <string>Load selected series</string>
+   </property>
+  </action>
+  <action name="actionLoad_series_as_DTI" >
+   <property name="enabled" >
+    <bool>false</bool>
+   </property>
+   <property name="icon" >
+    <iconset>
+     <normaloff>Resources/Icons/notepad.png</normaloff>Resources/Icons/notepad.png</iconset>
+   </property>
+   <property name="text" >
+    <string>Load series as DTI</string>
+   </property>
+  </action>
+  <action name="actionSave_tensor_field" >
+   <property name="enabled" >
+    <bool>false</bool>
+   </property>
+   <property name="icon" >
+    <iconset>
+     <normaloff>Resources/Icons/disk.png</normaloff>Resources/Icons/disk.png</iconset>
+   </property>
+   <property name="text" >
+    <string>Save tensor field</string>
+   </property>
+  </action>
+  <action name="actionFolder_explorer" >
+   <property name="checkable" >
+    <bool>true</bool>
+   </property>
+   <property name="checked" >
+    <bool>true</bool>
+   </property>
+   <property name="text" >
+    <string>Folder explorer</string>
+   </property>
+  </action>
+  <action name="actionTest" >
+   <property name="icon" >
+    <iconset>
+     <normaloff>Resources/Icons/clock.png</normaloff>Resources/Icons/clock.png</iconset>
+   </property>
+   <property name="text" >
+    <string>Test</string>
+   </property>
+  </action>
+  <action name="actionFuse_with_current_series" >
+   <property name="enabled" >
+    <bool>false</bool>
+   </property>
+   <property name="icon" >
+    <iconset>
+     <normaloff>Resources/Icons/Picture Document.png</normaloff>Resources/Icons/Picture Document.png</iconset>
+   </property>
+   <property name="text" >
+    <string>Fuse with current series</string>
+   </property>
+  </action>
+ </widget>
+ <layoutdefault spacing="6" margin="11" />
+ <resources/>
+ <connections/>
+</ui>

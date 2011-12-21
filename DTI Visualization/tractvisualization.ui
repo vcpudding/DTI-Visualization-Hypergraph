@@ -1,0 +1,448 @@
+<ui version="4.0" >
+ <class>TractVisualizationClass</class>
+ <widget class="QMainWindow" name="TractVisualizationClass" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>651</width>
+    <height>547</height>
+   </rect>
+  </property>
+  <property name="windowTitle" >
+   <string>TractVisualization</string>
+  </property>
+  <widget class="QWidget" name="centralWidget" >
+   <layout class="QHBoxLayout" name="horizontalLayout" >
+    <property name="margin" >
+     <number>0</number>
+    </property>
+    <item>
+     <widget class="QMdiArea" name="mdiArea" />
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menuBar" >
+   <property name="geometry" >
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>651</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFile" >
+    <property name="title" >
+     <string>File</string>
+    </property>
+    <addaction name="actionOpen_tract_file" />
+    <addaction name="actionSave_tracts" />
+    <addaction name="separator" />
+    <addaction name="actionLoad_clusters" />
+    <addaction name="actionSave_clusters" />
+    <addaction name="actionLoad_cluster_centers" />
+    <addaction name="actionSave_cluster_centers" />
+    <addaction name="actionLoad_fuzzy_clusters" />
+    <addaction name="actionSave_fuzzy_clusters" />
+    <addaction name="separator" />
+    <addaction name="actionSave_hypergraph" />
+    <addaction name="actionLoad_hypergraph" />
+    <addaction name="actionSave_hypergraph_layout" />
+    <addaction name="actionLoad_hypergraph_layout" />
+    <addaction name="separator" />
+    <addaction name="actionOpen_compound_window" />
+    <addaction name="actionOpen_fiber_window" />
+   </widget>
+   <widget class="QMenu" name="menuTemplate_Tractography" >
+    <property name="title" >
+     <string>Template</string>
+    </property>
+    <addaction name="actionCluster_Editor" />
+    <addaction name="actionTemplate_Maker" />
+    <addaction name="actionTract_MDS" />
+    <addaction name="actionCluster_MDS" />
+   </widget>
+   <widget class="QMenu" name="menuTractography" >
+    <property name="enabled" >
+     <bool>true</bool>
+    </property>
+    <property name="title" >
+     <string>Tractography</string>
+    </property>
+    <widget class="QMenu" name="menuCluster" >
+     <property name="title" >
+      <string>Cluster</string>
+     </property>
+     <addaction name="actionK_means" />
+     <addaction name="actionK_means_with_prune" />
+     <addaction name="actionFuzzy_c_means" />
+     <addaction name="actionFuzzy_c_means_one_step" />
+    </widget>
+    <widget class="QMenu" name="menuGenerate_hypergraph" >
+     <property name="title" >
+      <string>Hypergraph</string>
+     </property>
+     <addaction name="actionK_means_graph" />
+     <addaction name="actionGenerate_fuzzy_graph" />
+     <addaction name="separator" />
+     <addaction name="actionLayout_graph" />
+     <addaction name="actionFast_layout" />
+     <addaction name="actionClustered_layout" />
+     <addaction name="actionPartitioned_layout" />
+     <addaction name="separator" />
+     <addaction name="actionShow_graph" />
+    </widget>
+    <widget class="QMenu" name="menuFilters" >
+     <property name="title" >
+      <string>Filters</string>
+     </property>
+     <addaction name="actionLength_filter" />
+    </widget>
+    <widget class="QMenu" name="menuDown_sample" >
+     <property name="title" >
+      <string>Down sample</string>
+     </property>
+     <addaction name="actionRandom" />
+    </widget>
+    <addaction name="actionEmbed" />
+    <addaction name="actionLoad_norm_files" />
+    <addaction name="actionAssign_label" />
+    <addaction name="actionResample" />
+    <addaction name="menuCluster" />
+    <addaction name="menuGenerate_hypergraph" />
+    <addaction name="menuFilters" />
+    <addaction name="menuDown_sample" />
+   </widget>
+   <widget class="QMenu" name="menuHelp" >
+    <property name="title" >
+     <string>Help</string>
+    </property>
+    <addaction name="actionTest" />
+    <addaction name="actionExperiment_result" />
+   </widget>
+   <widget class="QMenu" name="menuDemo" >
+    <property name="title" >
+     <string>Demo</string>
+    </property>
+    <addaction name="actionAtlas_tractography" />
+    <addaction name="actionTarget_tract_embedding" />
+    <addaction name="actionLabeled_tract_embedding" />
+    <addaction name="actionGroup_comparison" />
+    <addaction name="actionWhole_brain_tractography" />
+   </widget>
+   <widget class="QMenu" name="menuOperation" >
+    <property name="title" >
+     <string>Operation</string>
+    </property>
+    <addaction name="actionRotation" />
+    <addaction name="actionSelect_fibers" />
+    <addaction name="actionPan" />
+   </widget>
+   <addaction name="menuFile" />
+   <addaction name="menuTractography" />
+   <addaction name="menuTemplate_Tractography" />
+   <addaction name="menuHelp" />
+   <addaction name="menuDemo" />
+   <addaction name="menuOperation" />
+  </widget>
+  <widget class="QToolBar" name="mainToolBar" >
+   <property name="enabled" >
+    <bool>true</bool>
+   </property>
+   <attribute name="toolBarArea" >
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak" >
+    <bool>false</bool>
+   </attribute>
+   <addaction name="actionOpen_tract_file" />
+   <addaction name="separator" />
+   <addaction name="actionTemplate_Maker" />
+   <addaction name="separator" />
+   <addaction name="actionEmbed" />
+   <addaction name="actionLoad_norm_files" />
+   <addaction name="actionAssign_label" />
+   <addaction name="separator" />
+  </widget>
+  <widget class="QStatusBar" name="statusBar" />
+  <action name="actionOpen_tract_file" >
+   <property name="icon" >
+    <iconset>
+     <normaloff>Resources/Icons/Rename Document.png</normaloff>Resources/Icons/Rename Document.png</iconset>
+   </property>
+   <property name="text" >
+    <string>Open tract file</string>
+   </property>
+  </action>
+  <action name="actionCluster_Editor" >
+   <property name="icon" >
+    <iconset>
+     <normaloff>Resources/Icons/Write Document.png</normaloff>Resources/Icons/Write Document.png</iconset>
+   </property>
+   <property name="text" >
+    <string>Cluster Editor</string>
+   </property>
+  </action>
+  <action name="actionTemplate_Maker" >
+   <property name="icon" >
+    <iconset>
+     <normaloff>Resources/Icons/Play All.png</normaloff>Resources/Icons/Play All.png</iconset>
+   </property>
+   <property name="text" >
+    <string>Template Maker</string>
+   </property>
+  </action>
+  <action name="actionEmbed" >
+   <property name="enabled" >
+    <bool>true</bool>
+   </property>
+   <property name="icon" >
+    <iconset>
+     <normaloff>Resources/Icons/Discussion.png</normaloff>Resources/Icons/Discussion.png</iconset>
+   </property>
+   <property name="text" >
+    <string>Embed</string>
+   </property>
+  </action>
+  <action name="actionLoad_norm_files" >
+   <property name="icon" >
+    <iconset>
+     <normaloff>Resources/Icons/Backup Green Button.png</normaloff>Resources/Icons/Backup Green Button.png</iconset>
+   </property>
+   <property name="text" >
+    <string>Load norm files</string>
+   </property>
+  </action>
+  <action name="actionAssign_label" >
+   <property name="icon" >
+    <iconset>
+     <normaloff>Resources/Icons/Appointment Urgent.png</normaloff>Resources/Icons/Appointment Urgent.png</iconset>
+   </property>
+   <property name="text" >
+    <string>Assign label</string>
+   </property>
+  </action>
+  <action name="actionTest" >
+   <property name="text" >
+    <string>Test</string>
+   </property>
+  </action>
+  <action name="actionTract_MDS" >
+   <property name="icon" >
+    <iconset>
+     <normaloff>Resources/Icons/Smiley Sad Blue.png</normaloff>Resources/Icons/Smiley Sad Blue.png</iconset>
+   </property>
+   <property name="text" >
+    <string>Tract MDS</string>
+   </property>
+  </action>
+  <action name="actionCluster_MDS" >
+   <property name="icon" >
+    <iconset>
+     <normaloff>Resources/Icons/Smiley Sad.png</normaloff>Resources/Icons/Smiley Sad.png</iconset>
+   </property>
+   <property name="text" >
+    <string>Cluster MDS</string>
+   </property>
+  </action>
+  <action name="actionExperiment_result" >
+   <property name="icon" >
+    <iconset>
+     <normaloff>Resources/Icons/paint.png</normaloff>Resources/Icons/paint.png</iconset>
+   </property>
+   <property name="text" >
+    <string>Experiment result</string>
+   </property>
+  </action>
+  <action name="actionAtlas_tractography" >
+   <property name="text" >
+    <string>Atlas tractography</string>
+   </property>
+  </action>
+  <action name="actionTarget_tract_embedding" >
+   <property name="text" >
+    <string>Target tract embedding</string>
+   </property>
+  </action>
+  <action name="actionLabeled_tract_embedding" >
+   <property name="text" >
+    <string>Labeled tract embedding</string>
+   </property>
+  </action>
+  <action name="actionGroup_comparison" >
+   <property name="text" >
+    <string>Group comparison</string>
+   </property>
+  </action>
+  <action name="actionWhole_brain_tractography" >
+   <property name="text" >
+    <string>Whole brain tractography</string>
+   </property>
+  </action>
+  <action name="actionRotation" >
+   <property name="checkable" >
+    <bool>true</bool>
+   </property>
+   <property name="checked" >
+    <bool>true</bool>
+   </property>
+   <property name="text" >
+    <string>Rotation</string>
+   </property>
+  </action>
+  <action name="actionSelect_fibers" >
+   <property name="checkable" >
+    <bool>true</bool>
+   </property>
+   <property name="text" >
+    <string>Select fibers</string>
+   </property>
+  </action>
+  <action name="actionPan" >
+   <property name="checkable" >
+    <bool>true</bool>
+   </property>
+   <property name="text" >
+    <string>Pan</string>
+   </property>
+  </action>
+  <action name="actionResample" >
+   <property name="text" >
+    <string>Resample</string>
+   </property>
+  </action>
+  <action name="actionSave_tracts" >
+   <property name="text" >
+    <string>Save tracts as</string>
+   </property>
+  </action>
+  <action name="actionSave_clusters" >
+   <property name="text" >
+    <string>Save clusters</string>
+   </property>
+  </action>
+  <action name="actionK_means" >
+   <property name="text" >
+    <string>K-means</string>
+   </property>
+  </action>
+  <action name="actionSave_cluster_centers" >
+   <property name="text" >
+    <string>Save cluster centers</string>
+   </property>
+  </action>
+  <action name="actionLoad_clusters" >
+   <property name="text" >
+    <string>Load clusters</string>
+   </property>
+  </action>
+  <action name="actionLoad_cluster_centers" >
+   <property name="text" >
+    <string>Load cluster centers</string>
+   </property>
+  </action>
+  <action name="actionK_means_graph" >
+   <property name="text" >
+    <string>Generate graph</string>
+   </property>
+  </action>
+  <action name="actionSave_hypergraph" >
+   <property name="text" >
+    <string>Save hypergraph</string>
+   </property>
+  </action>
+  <action name="actionLayout_graph" >
+   <property name="text" >
+    <string>Layout graph</string>
+   </property>
+  </action>
+  <action name="actionLoad_hypergraph" >
+   <property name="text" >
+    <string>Load hypergraph</string>
+   </property>
+  </action>
+  <action name="actionSave_hypergraph_layout" >
+   <property name="text" >
+    <string>Save hypergraph layout</string>
+   </property>
+  </action>
+  <action name="actionLoad_hypergraph_layout" >
+   <property name="text" >
+    <string>Load hypergraph layout</string>
+   </property>
+  </action>
+  <action name="actionShow_graph" >
+   <property name="text" >
+    <string>Show graph</string>
+   </property>
+  </action>
+  <action name="actionOpen_compound_window" >
+   <property name="text" >
+    <string>Open compound window</string>
+   </property>
+  </action>
+  <action name="actionFast_layout" >
+   <property name="text" >
+    <string>Fast layout</string>
+   </property>
+  </action>
+  <action name="actionClustered_layout" >
+   <property name="text" >
+    <string>Clustered layout</string>
+   </property>
+  </action>
+  <action name="actionPartitioned_layout" >
+   <property name="text" >
+    <string>Partitioned layout</string>
+   </property>
+  </action>
+  <action name="actionLength_filter" >
+   <property name="text" >
+    <string>Length filter</string>
+   </property>
+  </action>
+  <action name="actionK_means_with_prune" >
+   <property name="text" >
+    <string>K-means w/ prune</string>
+   </property>
+  </action>
+  <action name="actionRandom" >
+   <property name="text" >
+    <string>Random</string>
+   </property>
+  </action>
+  <action name="actionFuzzy_c_means" >
+   <property name="text" >
+    <string>Fuzzy c-means</string>
+   </property>
+  </action>
+  <action name="actionLoad_fuzzy_clusters" >
+   <property name="text" >
+    <string>Load fuzzy clusters</string>
+   </property>
+  </action>
+  <action name="actionSave_fuzzy_clusters" >
+   <property name="text" >
+    <string>Save fuzzy clusters</string>
+   </property>
+  </action>
+  <action name="actionGenerate_fuzzy_graph" >
+   <property name="text" >
+    <string>Generate fuzzy graph</string>
+   </property>
+  </action>
+  <action name="actionOpen_fiber_window" >
+   <property name="text" >
+    <string>Open fiber window</string>
+   </property>
+  </action>
+  <action name="actionFuzzy_c_means_one_step" >
+   <property name="text" >
+    <string>Fuzzy c-means one step</string>
+   </property>
+  </action>
+ </widget>
+ <layoutdefault spacing="6" margin="11" />
+ <resources/>
+ <connections/>
+</ui>

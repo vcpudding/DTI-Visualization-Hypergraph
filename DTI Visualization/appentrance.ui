@@ -1,0 +1,73 @@
+<ui version="4.0" >
+ <class>AppEntranceClass</class>
+ <widget class="QWidget" name="AppEntranceClass" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>165</width>
+    <height>87</height>
+   </rect>
+  </property>
+  <property name="sizePolicy" >
+   <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="contextMenuPolicy" >
+   <enum>Qt::NoContextMenu</enum>
+  </property>
+  <property name="windowTitle" >
+   <string>DTI Visualization Platform</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout" >
+   <property name="spacing" >
+    <number>9</number>
+   </property>
+   <property name="sizeConstraint" >
+    <enum>QLayout::SetFixedSize</enum>
+   </property>
+   <property name="margin" >
+    <number>15</number>
+   </property>
+   <item>
+    <widget class="QPushButton" name="btnDicom" >
+     <property name="sizePolicy" >
+      <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="text" >
+      <string>Dicom Explorer</string>
+     </property>
+     <property name="icon" >
+      <iconset>
+       <normaloff>Resources/Icons/Spotlight Blue Button.png</normaloff>Resources/Icons/Spotlight Blue Button.png</iconset>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="btnTract" >
+     <property name="sizePolicy" >
+      <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="text" >
+      <string>Tractography Explorer</string>
+     </property>
+     <property name="icon" >
+      <iconset>
+       <normaloff>Resources/Icons/Web Browser.png</normaloff>Resources/Icons/Web Browser.png</iconset>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <layoutdefault spacing="6" margin="11" />
+ <resources/>
+ <connections/>
+</ui>

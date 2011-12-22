@@ -2405,7 +2405,8 @@ void FiberData::updateClusterCentersFuzzy(const vector<vector<Link> > &matchings
 			denomBuf[j] = 0;
 			for (int k=0; k<_nFibers; ++k)
 			{
-				float p = _fuzzyClusters[k*_nClusters+i];
+				//float p = _fuzzyClusters[k*_nClusters+i];
+				float p = _fuzzyClusters[k*_nClusters+i]*_fuzzyClusters[k*_nClusters+i];
 				if (p==0)
 				{
 					continue;
@@ -2492,8 +2493,9 @@ void FiberData::updateClusterCentersFuzzy(const vector<vector<Link> > &matchings
 						{
 							FloatPoint d = _fibers[k][l]-_clusterCenters[i][j];
 							FloatPoint d1 = d*(1-dot(d, _clusterCenters[i][j])/(norm(d,2)*norm(_clusterCenters[i][j],2)));
-							_clusterCovs[i][j] += _fuzzyClusters[k*_nClusters+i]*(d1*trans(d1));
+							//_clusterCovs[i][j] += _fuzzyClusters[k*_nClusters+i]*(d1*trans(d1));
 							//_clusterCovs[i][j] += _fuzzyClusters[k*_nClusters+i]*(d*trans(d));
+							_clusterCovs[i][j] += (_fuzzyClusters[k*_nClusters+i]*_fuzzyClusters[k*_nClusters+i])*(d*trans(d));
 							//corresPts.push_back(l);
 						}
 					}
@@ -2935,7 +2937,113 @@ void FiberData::updateClusterCentersFuzzyDTW()
 	updateClusterCentersFuzzy(matchings);
 }
 
-void FiberData::clusterAFCC(int maxNumOfClusters)
+void FiberData::clusterAFCC(int maxNumOfClusters, const vector<int> &seedBuf)
 {
+	_clusters.assign(_nFibers, 0);
+	_nClusters = maxNumOfClusters;
+	_fuzzyClusters.resize(_nFibers*_nClusters);
+	_fuzzyClusters.assign(_fuzzyClusters.size(), 1.0/_nClusters);
 
+	/*make fibers of the same dimension*/
+	int nDim = 15;
+	this->resampleEqualSample(nDim);
+
+	/*initiate cluster centers*/
+	_clusterCenters.resize(_nClusters);
+
+	if (seedBuf.empty())
+	{
+		int nClusterSpecified = 0;
+		srand(time(NULL));
+		for (int i=0; i<_nFibers; ++i)
+		{
+			float p = (_nClusters-nClusterSpecified)*1.0f / (_nFibers-i);
+			if ((rand()%1000)/1000.0f < p)
+			{
+				_clusterCenters[nClusterSpecified] = new FloatPoint[nDim+1];
+				for (int j=0; j<=nDim; ++j)
+				{
+					_clusterCenters[nClusterSpecified][j] = _fibers[i][j];
+				}
+				++nClusterSpecified;
+			}
+		}
+	} else
+	{
+		for (int i=0; i<_nClusters; ++i)
+		{
+			_clusterCenters[i] = new FloatPoint[nDim+1];
+			for (int j=0; j<=nDim; ++j)
+			{
+				_clusterCenters[i][j] = _fibers[seedBuf[i]][j];
+			}
+		}
+	}
+
+	_clusterCovs.resize(_nClusters);
+	for (int i=0; i<_nClusters; ++i)
+	{
+		_clusterCovs[i].resize(nDim+1);
+		for (int j=0; j<=nDim; ++j)
+		{
+			_clusterCovs[i][j]<<1<<0<<0<<endr<<0<<1<<0<<endr<<0<<0<<1<<endr;
+		}
+	}
+	initClusterColor();
+	
+	vector<double> clusterCards (_nClusters);
+	clusterCards.assign(_nClusters, _nFibers*1.0/_nClusters);
+
+	double cost = 10000;
+	double lastCost = 0;
+	//int it0 = 5;
+	//double eta0 = 1.0;
+	//double tau = 1.0;
+	int nIt = 0;
+	while (fabs((cost-lastCost)/lastCost)>1.0e-3 && nIt<100)
+	{
+		lastCost = cost;
+
+		vector<float> distBuf (_nFibers*_nClusters);
+		getMatchings(_matchings);
+
+		for (int i=0; i<_nFibers; ++i)
+		{
+			float sumInvSqrDist = 0;
+			for (int j=0; j<_nClusters; ++j)
+			{
+				float d = fibDistMadah(_fibers[i], _clusterCenters[j], _matchings[i][j], _clusterCovs[j]);
+				distBuf[i*_nClusters+j] = d;
+				_fuzzyClusters[i*_nClusters+j] = 1/(d*d+1.0e-6);
+				sumInvSqrDist += _fuzzyClusters[i*_nClusters+j]; 
+			}
+
+			for (int j=0; j<_nClusters; ++j)
+			{
+				_fuzzyClusters[i*_nClusters+j] /= sumInvSqrDist;
+			}
+		}
+
+		for (int i=0; i<_nFibers; ++i)
+		{
+			for (int j=0; j<_nClusters; ++j)
+			{
+				double currCost = pow(_fuzzyClusters[i*_nClusters+j]*distBuf[i*_nClusters+j], 2);
+				cost += currCost;
+
+				if (cost!=cost)
+				{
+					float f = _fuzzyClusters[i*_nClusters+j];
+					float d = distBuf[i*_nClusters+j];
+					int stop = 1;
+				}
+			}
+		}
+
+		updateClusterCentersFuzzy(_matchings);
+
+		++nIt;
+	}
+
+	getClustersFromFuzzyClusters();
 }

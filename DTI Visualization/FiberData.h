@@ -150,6 +150,7 @@ public:
 	void				setGraphThres (float t) {_graphThres = t;}
 	void				getClusterCovs (const vector<vector<Link> > &matchings, vector<vector<fmat> > &clusterCovs);
 	void				getMatchings (vector<vector<Link> > &matchings);
+	void				getMatchingsDTW (vector<vector<Link> > &matchings);
 	void				initClusterMedoids ();
 	void				updateClusterCenters (const vector<vector<Link> > &matchings, vector<bool> &bClusterChanged=vector<bool>());
 	void				updateClusterCentersFuzzy (const vector<vector<Link> > &matchings, vector<bool> &bClusterChanged=vector<bool>());

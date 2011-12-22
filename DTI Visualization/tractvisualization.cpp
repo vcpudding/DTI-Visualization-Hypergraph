@@ -273,7 +273,7 @@ void TractVisualization::handleTest()
 	//int seeds [14] = {135,192,221,271,280,283,291,950,1008,1059,1238,1577,1688,1897};
 	vector<int> seedBuf (5);
 	seedBuf.assign(seeds, seeds+5);
-	//handleFiberWin();
+	handleFiberWin();
 	//_fibData->clusterFuzzyCMeans(false, seedBuf);
 	_fibData->clusterAFCC(5, seedBuf);
 	//_fibData->saveFuzzyClusters("D:\\Stella\\Research\\Sample data\\test data\\hypergraph\\whole brain cluster.fuz");
@@ -284,7 +284,7 @@ void TractVisualization::handleTest()
 	//_graph->loadLayout("D:\\Stella\\Research\\Sample data\\test data\\hypergraph\\labeled fuzzy layout.dat");
 	_graph->setClusters(_fibData->getClusters());
 	_graph->setClusterColorer(_fibData->getClusterColorer());
-	handleCompoundWin();
+	//handleCompoundWin();
 	//_fibData->loadFibers("D:\\Stella\\Research\\Sample data\\test data\\hypergraph\\test tracts.txt", 30, 30, 30);
 	//handleFiberWin();
 	//int seeds [] = {5,15,25};

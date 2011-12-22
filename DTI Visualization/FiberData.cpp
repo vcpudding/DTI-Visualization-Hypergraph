@@ -1921,6 +1921,22 @@ void FiberData::getMatchings(vector<vector<Link> > &matchings)
 	}
 }
 
+void FiberData::getMatchingsDTW(vector<vector<Link> > &matchings)
+{
+	int nClusters = _clusterCenters.size();
+	matchings.resize(_nFibers);
+	for (int i=0; i<_nFibers; ++i)
+	{
+		matchings[i].resize(nClusters);
+		for (int k=0; k<nClusters; ++k)
+		{
+			matchings[i][k].resize(_fibers[i][0](0)+1);
+			//matchFiber(_fibers[i], _clusterCenters[k], matchings[i][k]);
+			fibDistDTW(_fibers[i], _clusterCenters[k], 10, matchings[i][k]);
+		}
+	}
+}
+
 float fibDistMadah(const ArrFiber fib, const ArrFiber center, const Link &matching, const vector<fmat33> &covs)
 {
 	float dMadah;
@@ -3000,15 +3016,19 @@ void FiberData::clusterAFCC(int maxNumOfClusters, const vector<int> &seedBuf)
 	//double eta0 = 1.0;
 	//double tau = 1.0;
 	int nIt = 0;
-	while (fabs((cost-lastCost)/lastCost)>1.0e-3 && nIt<100)
+	double maxDiffMembership = 1.0;
+	while (maxDiffMembership>1.0e-1 && fabs((cost-lastCost)/lastCost)>1.0e-3 && nIt<100)
 	{
 		lastCost = cost;
+		maxDiffMembership = 0;
 
 		vector<float> distBuf (_nFibers*_nClusters);
 		getMatchings(_matchings);
 
 		for (int i=0; i<_nFibers; ++i)
 		{
+			vector<double> oldMembership (_nClusters);
+			oldMembership.assign(_fuzzyClusters.begin()+_nClusters*i, _fuzzyClusters.begin()+_nClusters*(i+1));
 			float sumInvSqrDist = 0;
 			for (int j=0; j<_nClusters; ++j)
 			{
@@ -3021,8 +3041,14 @@ void FiberData::clusterAFCC(int maxNumOfClusters, const vector<int> &seedBuf)
 			for (int j=0; j<_nClusters; ++j)
 			{
 				_fuzzyClusters[i*_nClusters+j] /= sumInvSqrDist;
+				if (fabs(_fuzzyClusters[i*_nClusters+j]-oldMembership[j])>maxDiffMembership)
+				{
+					maxDiffMembership = fabs(_fuzzyClusters[i*_nClusters+j]-oldMembership[j]);
+				}
 			}
 		}
+
+		updateClusterCentersFuzzy(_matchings);
 
 		for (int i=0; i<_nFibers; ++i)
 		{
@@ -3030,20 +3056,17 @@ void FiberData::clusterAFCC(int maxNumOfClusters, const vector<int> &seedBuf)
 			{
 				double currCost = pow(_fuzzyClusters[i*_nClusters+j]*distBuf[i*_nClusters+j], 2);
 				cost += currCost;
-
-				if (cost!=cost)
-				{
-					float f = _fuzzyClusters[i*_nClusters+j];
-					float d = distBuf[i*_nClusters+j];
-					int stop = 1;
-				}
 			}
 		}
 
-		updateClusterCentersFuzzy(_matchings);
-
 		++nIt;
-	}
 
-	getClustersFromFuzzyClusters();
+		getClustersFromFuzzyClusters();
+
+		/*int bContinue = QMessageBox::question(NULL, "AFCC", QString("Cost = %1. Continue?").arg(cost), QMessageBox::Yes|QMessageBox::No);
+		if (bContinue == QMessageBox::No)
+		{
+			break;
+		}*/
+	}
 }

@@ -55842,3 +55842,675 @@ alpha cost: -411.732=>-411.732(-1.53125e-006)
 		sumLogDist = 16.9904
 		alpha = 0.812847=>0.812615
 alpha cost: -243.184=>-243.184(-0.000288317)
+=========alpha cost error===========
+	*******cluster #8**********
+		sumPik = 47
+		sumDist = 45.6879
+		sumLogDist = -27.2743
+		alpha = 1.04421=>1.03179
+alpha cost: -72.9198=>-72.9208(-0.000994489)
+=========alpha cost error===========
+	*******cluster #10**********
+		sumPik = 13.6284
+		sumDist = 6.04152
+		sumLogDist = -27.2169
+		alpha = 0.52678=>0.524347
+alpha cost: -27.3851=>-27.3856(-0.000522541)
+=========alpha cost error===========
+	*******cluster #9**********
+		sumPik = 56
+		sumDist = 189.03
+		sumLogDist = 34.6957
+		alpha = 0.963996=>0.96129
+alpha cost: -89.4156=>-89.4164(-0.000809063)
+=========alpha cost error===========
+	*******cluster #10**********
+		sumPik = 13.6377
+		sumDist = 6.12623
+		sumLogDist = -27.176
+		alpha = 0.524347=>0.520943
+alpha cost: -27.4678=>-27.4685(-0.00067813)
+=========alpha cost error===========
+	*******cluster #7**********
+		sumPik = 125
+		sumDist = 603.945
+		sumLogDist = 151.513
+		alpha = 1.51376=>1.51376
+alpha cost: -164.445=>-164.445(-1.04279e-010)
+=========alpha cost error===========
+	*******cluster #10**********
+		sumPik = 13.5521
+		sumDist = 6.05532
+		sumLogDist = -27.129
+		alpha = 0.520943=>0.519502
+alpha cost: -27.3227=>-27.323(-0.000337757)
+=========alpha cost error===========
+	*******cluster #0**********
+		sumPik = 12
+		sumDist = 3.78013
+		sumLogDist = -26.535
+		alpha = 0.579229=>0.579229
+alpha cost: -23.2593=>-23.2593(-5.33973e-012)
+=========alpha cost error===========
+	*******cluster #9**********
+		sumPik = 56
+		sumDist = 189.03
+		sumLogDist = 34.6957
+		alpha = 0.96129=>0.96129
+alpha cost: -89.4164=>-89.4164(-2.6148e-012)
+=========alpha cost error===========
+	*******cluster #10**********
+		sumPik = 13.3424
+		sumDist = 5.92617
+		sumLogDist = -27.0092
+		alpha = 0.519502=>0.513336
+alpha cost: -27.0147=>-27.0156(-0.000914418)
+=========alpha cost error===========
+	*******cluster #12**********
+		sumPik = 75
+		sumDist = 121.522
+		sumLogDist = -0.000973185
+		alpha = 1.16563=>1.16562
+alpha cost: -110.614=>-110.614(-2.52272e-006)
+=========alpha cost error===========
+	*******cluster #13**********
+		sumPik = 142.671
+		sumDist = 315.321
+		sumLogDist = 15.343
+		alpha = 0.862849=>0.849068
+alpha cost: -239.317=>-239.32(-0.00359165)
+=========alpha cost error===========
+	*******cluster #0**********
+		sumPik = 12
+		sumDist = 3.78013
+		sumLogDist = -26.535
+		alpha = 0.579229=>0.579229
+alpha cost: -23.2593=>-23.2593(-9.54262e-010)
+=========alpha cost error===========
+	*******cluster #3**********
+		sumPik = 42.7742
+		sumDist = 68.7505
+		sumLogDist = -26.0609
+		alpha = 0.58072=>0.566243
+alpha cost: -83.5959=>-83.5965(-0.00057725)
+=========alpha cost error===========
+	*******cluster #5**********
+		sumPik = 121
+		sumDist = 399.174
+		sumLogDist = 40.1989
+		alpha = 0.700699=>0.692998
+alpha cost: -219.434=>-219.44(-0.00598926)
+=========alpha cost error===========
+	*******cluster #10**********
+		sumPik = 12.9917
+		sumDist = 5.71067
+		sumLogDist = -26.8202
+		alpha = 0.513336=>0.502648
+alpha cost: -26.5036=>-26.5043(-0.000685533)
+=========alpha cost error===========
+	*******cluster #11**********
+		sumPik = 259.002
+		sumDist = 1802.95
+		sumLogDist = 362.112
+		alpha = 1.06641=>1.04857
+alpha cost: -399.193=>-399.193(-0.000473892)
+=========alpha cost error===========
+	*******cluster #13**********
+		sumPik = 143.409
+		sumDist = 326.603
+		sumLogDist = 17.4678
+		alpha = 0.849068=>0.832017
+alpha cost: -242.473=>-242.474(-0.000837834)
+=========alpha cost error===========
+	*******cluster #0**********
+		sumPik = 12
+		sumDist = 3.78013
+		sumLogDist = -26.535
+		alpha = 0.579229=>0.579229
+alpha cost: -23.2593=>-23.2593(-2.38881e-008)
+=========alpha cost error===========
+	*******cluster #5**********
+		sumPik = 122
+		sumDist = 416.254
+		sumLogDist = 43.0368
+		alpha = 0.692998=>0.683793
+alpha cost: -222.364=>-222.37(-0.00613452)
+=========alpha cost error===========
+	*******cluster #8**********
+		sumPik = 92
+		sumDist = 475.883
+		sumLogDist = 70.2587
+		alpha = 0.690011=>0.680229
+alpha cost: -168.014=>-168.018(-0.004569)
+=========alpha cost error===========
+	*******cluster #10**********
+		sumPik = 12.6584
+		sumDist = 5.49547
+		sumLogDist = -26.6556
+		alpha = 0.502648=>0.492686
+alpha cost: -26.0084=>-26.0092(-0.000747591)
+=========alpha cost error===========
+	*******cluster #11**********
+		sumPik = 260.004
+		sumDist = 1835.5
+		sumLogDist = 365.599
+		alpha = 1.04857=>1.03816
+alpha cost: -402.375=>-402.381(-0.00614524)
+=========alpha cost error===========
+	*******cluster #13**********
+		sumPik = 143.128
+		sumDist = 325.307
+		sumLogDist = 17.0433
+		alpha = 0.832017=>0.831265
+alpha cost: -242.084=>-242.085(-0.000869606)
+=========alpha cost error===========
+	*******cluster #0**********
+		sumPik = 12
+		sumDist = 3.78011
+		sumLogDist = -26.5349
+		alpha = 0.579229=>0.579228
+alpha cost: -23.2593=>-23.2593(-2.47839e-007)
+=========alpha cost error===========
+	*******cluster #5**********
+		sumPik = 122
+		sumDist = 416.254
+		sumLogDist = 43.0368
+		alpha = 0.683793=>0.683793
+alpha cost: -222.37=>-222.37(-5.91456e-011)
+=========alpha cost error===========
+	*******cluster #8**********
+		sumPik = 95
+		sumDist = 536.949
+		sumLogDist = 79.2984
+		alpha = 0.680229=>0.668432
+alpha cost: -174.635=>-174.639(-0.00409606)
+=========alpha cost error===========
+	*******cluster #12**********
+		sumPik = 75.0002
+		sumDist = 121.525
+		sumLogDist = -0.000524784
+		alpha = 1.16562=>1.16558
+alpha cost: -110.616=>-110.616(-1.33991e-005)
+=========alpha cost error===========
+	*******cluster #13**********
+		sumPik = 142.832
+		sumDist = 323.951
+		sumLogDist = 16.6007
+		alpha = 0.831265=>0.830474
+alpha cost: -241.673=>-241.674(-0.000913124)
+=========alpha cost error===========
+	*******cluster #0**********
+		sumPik = 11.9998
+		sumDist = 3.78005
+		sumLogDist = -26.5347
+		alpha = 0.579228=>0.579222
+alpha cost: -23.259=>-23.259(-1.17991e-006)
+=========alpha cost error===========
+	*******cluster #2**********
+		sumPik = 8
+		sumDist = 1.38744
+		sumLogDist = -25.8923
+		alpha = 0.43076=>0.43076
+alpha cost: -17.2337=>-17.2337(-1.42109e-014)
+=========alpha cost error===========
+	*******cluster #3**********
+		sumPik = 57.7913
+		sumDist = 219.789
+		sumLogDist = 8.26997
+		alpha = 0.527715=>0.520833
+alpha cost: -116.405=>-116.409(-0.00398194)
+=========alpha cost error===========
+	*******cluster #8**********
+		sumPik = 98
+		sumDist = 607.29
+		sumLogDist = 88.7626
+		alpha = 0.668432=>0.654937
+alpha cost: -181.529=>-181.532(-0.00312934)
+=========alpha cost error===========
+	*******cluster #11**********
+		sumPik = 263.006
+		sumDist = 1934.59
+		sumLogDist = 376.097
+		alpha = 1.01857=>1.0095
+alpha cost: -411.704=>-411.71(-0.00673969)
+=========alpha cost error===========
+	*******cluster #13**********
+		sumPik = 142.635
+		sumDist = 324.302
+		sumLogDist = 16.442
+		alpha = 0.830474=>0.826887
+alpha cost: -241.745=>-241.749(-0.00347506)
+=========alpha cost error===========
+	*******cluster #0**********
+		sumPik = 11.9993
+		sumDist = 3.77982
+		sumLogDist = -26.5342
+		alpha = 0.579222=>0.579203
+alpha cost: -23.2583=>-23.2583(-3.71219e-006)
+=========alpha cost error===========
+	*******cluster #2**********
+		sumPik = 8
+		sumDist = 1.38744
+		sumLogDist = -25.8923
+		alpha = 0.43076=>0.43076
+alpha cost: -17.2337=>-17.2337(-1.95044e-012)
+=========alpha cost error===========
+	*******cluster #3**********
+		sumPik = 64.3462
+		sumDist = 320.823
+		sumLogDist = 26.1381
+		alpha = 0.520833=>0.517932
+alpha cost: -129.87=>-129.873(-0.00287377)
+=========alpha cost error===========
+	*******cluster #4**********
+		sumPik = 26
+		sumDist = 10.3176
+		sumLogDist = -41.0113
+		alpha = 0.886698=>0.886698
+alpha cost: -42.8747=>-42.8747(-1.23634e-012)
+=========alpha cost error===========
+	*******cluster #6**********
+		sumPik = 249.855
+		sumDist = 3818.8
+		sumLogDist = 464.344
+		alpha = 0.701363=>0.688075
+alpha cost: -454.336=>-454.344(-0.00832703)
+=========alpha cost error===========
+	*******cluster #8**********
+		sumPik = 99.9998
+		sumDist = 657.344
+		sumLogDist = 95.2022
+		alpha = 0.654937=>0.647047
+alpha cost: -186.07=>-186.075(-0.00546608)
+=========alpha cost error===========
+	*******cluster #11**********
+		sumPik = 263.008
+		sumDist = 1934.71
+		sumLogDist = 376.104
+		alpha = 1.0095=>1.00944
+alpha cost: -411.722=>-411.723(-8.41713e-005)
+=========alpha cost error===========
+	*******cluster #13**********
+		sumPik = 142.628
+		sumDist = 327.293
+		sumLogDist = 16.7857
+		alpha = 0.826887=>0.819827
+alpha cost: -242.54=>-242.546(-0.0052286)
+=========alpha cost error===========
+	*******cluster #0**********
+		sumPik = 11.9984
+		sumDist = 3.77944
+		sumLogDist = -26.5334
+		alpha = 0.579203=>0.579171
+alpha cost: -23.257=>-23.257(-6.17606e-006)
+=========alpha cost error===========
+	*******cluster #2**********
+		sumPik = 8
+		sumDist = 1.38744
+		sumLogDist = -25.8923
+		alpha = 0.43076=>0.43076
+alpha cost: -17.2337=>-17.2337(-2.98439e-010)
+=========alpha cost error===========
+	*******cluster #3**********
+		sumPik = 69.8183
+		sumDist = 435.405
+		sumLogDist = 42.465
+		alpha = 0.517932=>0.509894
+alpha cost: -141.704=>-141.709(-0.00483131)
+=========alpha cost error===========
+	*******cluster #4**********
+		sumPik = 26
+		sumDist = 10.3176
+		sumLogDist = -41.0113
+		alpha = 0.886698=>0.886698
+alpha cost: -42.8747=>-42.8747(-1.58359e-010)
+=========alpha cost error===========
+	*******cluster #6**********
+		sumPik = 254.839
+		sumDist = 4148.12
+		sumLogDist = 485.237
+		alpha = 0.688075=>0.676168
+alpha cost: -466.445=>-466.456(-0.0107421)
+=========alpha cost error===========
+	*******cluster #8**********
+		sumPik = 100.998
+		sumDist = 683.711
+		sumLogDist = 98.4714
+		alpha = 0.647047=>0.643133
+alpha cost: -188.353=>-188.357(-0.00407203)
+=========alpha cost error===========
+	*******cluster #10**********
+		sumPik = 11.6978
+		sumDist = 7.55248
+		sumLogDist = -24.48
+		alpha = 0.402687=>0.392175
+alpha cost: -26.0312=>-26.0315(-0.00029465)
+=========alpha cost error===========
+	*******cluster #11**********
+		sumPik = 263.009
+		sumDist = 1934.78
+		sumLogDist = 376.108
+		alpha = 1.00944=>1.0094
+alpha cost: -411.73=>-411.73(-5.69044e-005)
+=========alpha cost error===========
+	*******cluster #13**********
+		sumPik = 142.639
+		sumDist = 329.74
+		sumLogDist = 17.0814
+		alpha = 0.819827=>0.814418
+alpha cost: -243.185=>-243.19(-0.00469058)
+=========alpha cost error===========
+	*******cluster #0**********
+		sumPik = 11.9972
+		sumDist = 3.77891
+		sumLogDist = -26.5322
+		alpha = 0.579171=>0.579126
+alpha cost: -23.2553=>-23.2553(-8.60451e-006)
+=========alpha cost error===========
+	*******cluster #2**********
+		sumPik = 8
+		sumDist = 1.38744
+		sumLogDist = -25.8923
+		alpha = 0.43076=>0.43076
+alpha cost: -17.2337=>-17.2337(-8.02256e-009)
+=========alpha cost error===========
+	*******cluster #4**********
+		sumPik = 26
+		sumDist = 10.3176
+		sumLogDist = -41.0113
+		alpha = 0.886698=>0.886698
+alpha cost: -42.8747=>-42.8747(-3.09801e-009)
+=========alpha cost error===========
+	*******cluster #6**********
+		sumPik = 257.867
+		sumDist = 4367.08
+		sumLogDist = 498.261
+		alpha = 0.676168=>0.668526
+alpha cost: -474.001=>-474.014(-0.0134325)
+=========alpha cost error===========
+	*******cluster #8**********
+		sumPik = 100.992
+		sumDist = 683.662
+		sumLogDist = 98.4591
+		alpha = 0.643133=>0.643103
+alpha cost: -188.348=>-188.348(-4.24085e-005)
+=========alpha cost error===========
+	*******cluster #10**********
+		sumPik = 11.2539
+		sumDist = 6.8906
+		sumLogDist = -24.4596
+		alpha = 0.392175=>0.386612
+alpha cost: -25.166=>-25.1669(-0.00090246)
+=========alpha cost error===========
+	*******cluster #11**********
+		sumPik = 263.01
+		sumDist = 1934.81
+		sumLogDist = 376.11
+		alpha = 1.0094=>1.00939
+alpha cost: -411.733=>-411.733(-2.03251e-005)
+=========alpha cost error===========
+	*******cluster #13**********
+		sumPik = 142.565
+		sumDist = 330.272
+		sumLogDist = 17.0725
+		alpha = 0.814418=>0.812263
+alpha cost: -243.31=>-243.313(-0.00238052)
+=========alpha cost error===========
+	*******cluster #0**********
+		sumPik = 11.995
+		sumDist = 3.77812
+		sumLogDist = -26.5299
+		alpha = 0.579126=>0.579047
+alpha cost: -23.2523=>-23.2523(-1.53641e-005)
+=========alpha cost error===========
+	*******cluster #2**********
+		sumPik = 7.99996
+		sumDist = 1.38744
+		sumLogDist = -25.8922
+		alpha = 0.43076=>0.430758
+alpha cost: -17.2337=>-17.2337(-3.30352e-007)
+=========alpha cost error===========
+	*******cluster #3**********
+		sumPik = 87.635
+		sumDist = 914.475
+		sumLogDist = 99.6451
+		alpha = 0.516681=>0.515047
+alpha cost: -177.23=>-177.232(-0.00246809)
+=========alpha cost error===========
+	*******cluster #4**********
+		sumPik = 26
+		sumDist = 10.3176
+		sumLogDist = -41.0113
+		alpha = 0.886698=>0.886698
+alpha cost: -42.8746=>-42.8746(-9.18749e-008)
+=========alpha cost error===========
+	*******cluster #6**********
+		sumPik = 256.307
+		sumDist = 4313.86
+		sumLogDist = 492.672
+		alpha = 0.668526=>0.666002
+alpha cost: -471.807=>-471.814(-0.00699731)
+=========alpha cost error===========
+	*******cluster #8**********
+		sumPik = 100.953
+		sumDist = 683.315
+		sumLogDist = 98.3812
+		alpha = 0.643103=>0.642937
+alpha cost: -188.295=>-188.295(-0.000224469)
+=========alpha cost error===========
+	*******cluster #10**********
+		sumPik = 10.6548
+		sumDist = 5.94544
+		sumLogDist = -24.4301
+		alpha = 0.386612=>0.381428
+alpha cost: -23.9368=>-23.9376(-0.000852009)
+=========alpha cost error===========
+	*******cluster #0**********
+		sumPik = 11.9928
+		sumDist = 3.77746
+		sumLogDist = -26.5271
+		alpha = 0.579047=>0.578962
+alpha cost: -23.2493=>-23.2493(-1.65516e-005)
+=========alpha cost error===========
+	*******cluster #2**********
+		sumPik = 7.99978
+		sumDist = 1.3874
+		sumLogDist = -25.8919
+		alpha = 0.430758=>0.430751
+alpha cost: -17.2334=>-17.2334(-1.5166e-006)
+=========alpha cost error===========
+	*******cluster #3**********
+		sumPik = 92.4279
+		sumDist = 1098.45
+		sumLogDist = 116.314
+		alpha = 0.515047=>0.511849
+alpha cost: -187.338=>-187.343(-0.00450192)
+=========alpha cost error===========
+	*******cluster #4**********
+		sumPik = 25.9999
+		sumDist = 10.3175
+		sumLogDist = -41.0112
+		alpha = 0.886698=>0.886696
+alpha cost: -42.8745=>-42.8745(-3.66079e-007)
+=========alpha cost error===========
+	*******cluster #5**********
+		sumPik = 122
+		sumDist = 416.254
+		sumLogDist = 43.0368
+		alpha = 0.683794=>0.683794
+alpha cost: -222.37=>-222.37(-2.27658e-011)
+=========alpha cost error===========
+	*******cluster #6**********
+		sumPik = 255.035
+		sumDist = 4276.41
+		sumLogDist = 488.257
+		alpha = 0.666002=>0.663418
+alpha cost: -470.147=>-470.154(-0.00714794)
+=========alpha cost error===========
+	*******cluster #8**********
+		sumPik = 100.894
+		sumDist = 682.748
+		sumLogDist = 98.2562
+		alpha = 0.642937=>0.642682
+alpha cost: -188.211=>-188.211(-0.000345805)
+=========alpha cost error===========
+	*******cluster #10**********
+		sumPik = 10.1839
+		sumDist = 5.18901
+		sumLogDist = -24.4342
+		alpha = 0.381428=>0.37847
+alpha cost: -22.94=>-22.9407(-0.000643322)
+=========alpha cost error===========
+	*******cluster #11**********
+		sumPik = 263.009
+		sumDist = 1934.8
+		sumLogDist = 376.109
+		alpha = 1.00939=>1.00939
+alpha cost: -411.732=>-411.732(-1.73868e-007)
+=========alpha cost error===========
+	*******cluster #13**********
+		sumPik = 142.458
+		sumDist = 329.433
+		sumLogDist = 16.8928
+		alpha = 0.812928=>0.812889
+alpha cost: -243.058=>-243.058(-4.95118e-005)
+=========alpha cost error===========
+	*******cluster #0**********
+		sumPik = 11.99
+		sumDist = 3.77658
+		sumLogDist = -26.5235
+		alpha = 0.578962=>0.578852
+alpha cost: -23.2454=>-23.2455(-2.12483e-005)
+=========alpha cost error===========
+	*******cluster #2**********
+		sumPik = 7.99941
+		sumDist = 1.38732
+		sumLogDist = -25.8913
+		alpha = 0.430751=>0.430735
+alpha cost: -17.2328=>-17.2328(-3.14247e-006)
+=========alpha cost error===========
+	*******cluster #3**********
+		sumPik = 94.9166
+		sumDist = 1216.23
+		sumLogDist = 125.298
+		alpha = 0.511849=>0.506911
+alpha cost: -193.049=>-193.055(-0.00607984)
+=========alpha cost error===========
+	*******cluster #4**********
+		sumPik = 25.9997
+		sumDist = 10.3174
+		sumLogDist = -41.011
+		alpha = 0.886696=>0.886692
+alpha cost: -42.8743=>-42.8743(-7.2278e-007)
+=========alpha cost error===========
+	*******cluster #5**********
+		sumPik = 122
+		sumDist = 416.254
+		sumLogDist = 43.0368
+		alpha = 0.683794=>0.683794
+alpha cost: -222.37=>-222.37(-1.29319e-011)
+=========alpha cost error===========
+	*******cluster #6**********
+		sumPik = 253.318
+		sumDist = 4196.72
+		sumLogDist = 481.762
+		alpha = 0.663418=>0.663023
+alpha cost: -467.093=>-467.094(-0.00125636)
+=========alpha cost error===========
+	*******cluster #8**********
+		sumPik = 101.424
+		sumDist = 701.53
+		sumLogDist = 100.195
+		alpha = 0.642682=>0.637973
+alpha cost: -189.714=>-189.719(-0.00465958)
+=========alpha cost error===========
+	*******cluster #10**********
+		sumPik = 9.86617
+		sumDist = 4.69007
+		sumLogDist = -24.4343
+		alpha = 0.37847=>0.376986
+alpha cost: -22.2543=>-22.2547(-0.000371663)
+=========alpha cost error===========
+	*******cluster #11**********
+		sumPik = 263.009
+		sumDist = 1934.8
+		sumLogDist = 376.109
+		alpha = 1.00939=>1.00939
+alpha cost: -411.732=>-411.732(-7.45973e-007)
+=========alpha cost error===========
+	*******cluster #12**********
+		sumPik = 75.0001
+		sumDist = 121.524
+		sumLogDist = -0.000627793
+		alpha = 1.16559=>1.16559
+alpha cost: -110.616=>-110.616(-2.05034e-010)
+=========alpha cost error===========
+	*******cluster #13**********
+		sumPik = 142.476
+		sumDist = 329.553
+		sumLogDist = 16.9228
+		alpha = 0.812889=>0.812847
+alpha cost: -243.093=>-243.093(-5.16525e-005)
+=========alpha cost error===========
+	*******cluster #0**********
+		sumPik = 11.9877
+		sumDist = 3.77588
+		sumLogDist = -26.5206
+		alpha = 0.578852=>0.578763
+alpha cost: -23.2423=>-23.2424(-1.70686e-005)
+=========alpha cost error===========
+	*******cluster #2**********
+		sumPik = 7.99899
+		sumDist = 1.38723
+		sumLogDist = -25.8906
+		alpha = 0.430735=>0.430718
+alpha cost: -17.2322=>-17.2322(-3.49613e-006)
+=========alpha cost error===========
+	*******cluster #3**********
+		sumPik = 96.2725
+		sumDist = 1282.23
+		sumLogDist = 130.149
+		alpha = 0.506911=>0.504463
+alpha cost: -196.148=>-196.152(-0.00390932)
+=========alpha cost error===========
+	*******cluster #4**********
+		sumPik = 25.9995
+		sumDist = 10.3173
+		sumLogDist = -41.0107
+		alpha = 0.886692=>0.886688
+alpha cost: -42.874=>-42.874(-7.97798e-007)
+=========alpha cost error===========
+	*******cluster #6**********
+		sumPik = 252.196
+		sumDist = 4144.2
+		sumLogDist = 477.522
+		alpha = 0.663023=>0.662896
+alpha cost: -465.057=>-465.058(-0.000410169)
+=========alpha cost error===========
+	*******cluster #8**********
+		sumPik = 101.347
+		sumDist = 700.172
+		sumLogDist = 99.9945
+		alpha = 0.637973=>0.637942
+alpha cost: -189.578=>-189.578(-4.41481e-005)
+=========alpha cost error===========
+	*******cluster #10**********
+		sumPik = 9.67537
+		sumDist = 4.38786
+		sumLogDist = -24.4417
+		alpha = 0.376986=>0.376514
+alpha cost: -21.8335=>-21.8337(-0.000128546)
+=========alpha cost error===========
+	*******cluster #11**********
+		sumPik = 263.009
+		sumDist = 1934.8
+		sumLogDist = 376.109
+		alpha = 1.00939=>1.00939
+alpha cost: -411.732=>-411.732(-1.53125e-006)
+=========alpha cost error===========
+	*******cluster #13**********
+		sumPik = 142.513
+		sumDist = 329.862
+		sumLogDist = 16.9904
+		alpha = 0.812847=>0.812615
+alpha cost: -243.184=>-243.184(-0.000288317)

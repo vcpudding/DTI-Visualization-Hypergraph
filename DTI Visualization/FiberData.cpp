@@ -2934,3 +2934,8 @@ void FiberData::updateClusterCentersFuzzyDTW()
 
 	updateClusterCentersFuzzy(matchings);
 }
+
+void FiberData::clusterAFCC(int maxNumOfClusters)
+{
+
+}

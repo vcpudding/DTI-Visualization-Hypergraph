@@ -134,6 +134,7 @@ public:
 	void				clusterKMeansWithPrune (int k);
 	void				clusterFuzzyCMeans (bool bUpdate, const vector<int> &seedBuf = vector<int>(), int nSteps = 10000);
 	void				clusterFuzzyCMeansDTW (bool bUpdate, const vector<int> &seedBuf = vector<int>(), int nSteps = 10000);
+	void				clusterAFCC (int maxNumOfClusters);
 
 	Hypergraph *		getGraphKMeans (DistMetric metric, vector<bool> &bClusterChanged=vector<bool>());
 	Hypergraph *		getGraphFuzzyCMeans ();

@@ -198,9 +198,9 @@ void makeTestTracts ()
 
 void TractVisualization::handleTest()
 {
-	//_fibData->loadFibersFromTrk("D:\\Stella\\Research\\Sample data\\test data\\hypergraph\\whole brain tracks test.trk");
+	_fibData->loadFibersFromTrk("D:\\Stella\\Research\\Sample data\\test data\\hypergraph\\whole brain tracks test.trk");
 	//_fibData->loadFuzzyClusters("D:\\Stella\\Research\\Sample data\\test data\\hypergraph\\whole brain cluster.fuz");
-	_fibData->loadFibersFromTrk("D:\\Stella\\Research\\Sample data\\test data\\hypergraph\\labeled.trk");
+	//_fibData->loadFibersFromTrk("D:\\Stella\\Research\\Sample data\\test data\\hypergraph\\labeled.trk");
 
 	/*_fibData->resampleEqualSample(15);
 	vector<int> matching1;
@@ -268,14 +268,14 @@ void TractVisualization::handleTest()
 	logFile.close();*/
 
 	//_fibData->loadFuzzyClusters("D:\\Stella\\Research\\Sample data\\test data\\hypergraph\\labeled fuzzy cluster.fuz");
-	int seeds [5] = {45, 277, 556, 666, 928};
+	//int seeds [5] = {45, 277, 556, 666, 928};
 	//int seeds [20] = {3400, 2080, 2824, 1108, 4573, 410, 2692, 1455, 2168, 3008, 2841,2545,588,4366,112,4649,225,4993,2961,1236};
-	//int seeds [14] = {135,192,221,271,280,283,291,950,1008,1059,1238,1577,1688,1897};
-	vector<int> seedBuf (5);
-	seedBuf.assign(seeds, seeds+5);
+	int seeds [14] = {135,192,221,271,280,283,291,950,1008,1059,1238,1577,1688,1897};
+	vector<int> seedBuf (14);
+	seedBuf.assign(seeds, seeds+14);
 	handleFiberWin();
 	//_fibData->clusterFuzzyCMeans(false, seedBuf);
-	_fibData->clusterAFCC(5, seedBuf);
+	_fibData->clusterAFCC(14, seedBuf);
 	//_fibData->saveFuzzyClusters("D:\\Stella\\Research\\Sample data\\test data\\hypergraph\\whole brain cluster.fuz");
 	//_fibData->saveFuzzyClusters("D:\\Stella\\Research\\Sample data\\test data\\hypergraph\\labeled fuzzy cluster.fuz");
 	//_fibData->saveFuzzyClusters("D:\\Stella\\Research\\Sample data\\test data\\hypergraph\\whole brain test cluster.fuz");

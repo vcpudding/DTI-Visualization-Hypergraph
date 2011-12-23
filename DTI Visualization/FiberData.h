@@ -84,6 +84,7 @@ public:
 
 	void				setNumOfFibers(int n);
 	void				drawFibers();
+	void				drawFibersAsTubes(float radius);
 	void				drawClusterCenters ();
 	void				drawMatchings ();
 	void				genFiberDispList();

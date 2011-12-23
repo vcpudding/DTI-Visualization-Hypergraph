@@ -196,6 +196,70 @@ void FiberData::drawFibers()
 	glPopMatrix();
 }
 
+void FiberData::drawFibersAsTubes( float radius )
+{
+	glEnable(GL_DEPTH_TEST);
+
+	const int N_CIRCLE_PTS = 20;
+	vector<float> circlePts (N_CIRCLE_PTS*2);
+	for (int i=0; i<N_CIRCLE_PTS; ++i)
+	{
+		circlePts[i*2] = radius*cos(i*2.0F*radius/N_CIRCLE_PTS);
+	}
+
+	glPushMatrix();
+	glTranslatef(-_sizeX*_volSizeX/2, -_sizeY*_volSizeY/2, -_sizeZ*_volSizeZ/2);
+	for(int i=0; i<_nFibers; ++i)
+	{
+		glPushName(i);
+		vector<FloatPoint> tangent (_fibers[i][0](0)+1);
+		vector<FloatPoint> normal (_fibers[i][0](0)+1);
+		vector<FloatPoint> binormal (_fibers[i][0](0)+1);
+
+		for (int j=1; j<=_fibers[i][0](0); ++j)
+		{
+			if (j==1)
+			{
+				tangent[j] = _fibers[i][j+1]-_fibers[i][j];
+			} else if (j == _fibers[i][0](0))
+			{
+				tangent[j] = _fibers[i][j]-_fibers[i][j-1];
+			} else
+			{
+				tangent[j] = (_fibers[i][j+1]-_fibers[i][j-1])/2;
+			}
+			tangent[j] /= norm_2(tangent[j]);
+		}
+
+		for (int j=1; j<=_fibers[i][0](0); ++j)
+		{
+			if (j==1)
+			{
+				normal[j] = tangent[j+1]-tangent[j];
+			} else if (j == _fibers[i][0](0))
+			{
+				normal[j] = tangent[j]-tangent[j-1];
+			} else
+			{
+				normal[j] = (tangent[j+1]-tangent[j-1])/2;
+			}
+			normal[j] /= norm_2(normal[j]);
+			binormal[j] = cross(tangent[j], normal[j]);
+		}
+
+		glBegin(GL_LINE_STRIP);
+		for (int j=1; j<=_fibers[i][0](0); ++j)
+		{
+			setFiberColor(i,j);
+			glVertex3fv(_fibers[i][j].memptr());
+		}
+		glEnd();
+		glPopName();
+	}
+
+	glPopMatrix();
+}
+
 void FiberData::drawClusterCenters()
 {
 	glEnable(GL_DEPTH_TEST);

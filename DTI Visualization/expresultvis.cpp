@@ -586,7 +586,7 @@ void expResultVis::drawOrdinaryAndConstrainedMDS()
 	glBegin(GL_POINTS);
 	for (int i=0; i<nFibers; ++i)
 	{
-		_fiberData->setFiberColor(i, 1);
+		//_fiberData->setFiberColor(i, 1);
 		glVertex2f(_ordinaryMDS[i*2], _ordinaryMDS[i*2+1]);
 	}
 	glEnd();
@@ -628,7 +628,7 @@ void expResultVis::drawOrdinaryAndConstrainedMDS()
 	glBegin(GL_POINTS);
 	for (int i=0; i<nFibers; ++i)
 	{
-		_fiberData->setFiberColor(i, 1);
+		//_fiberData->setFiberColor(i, 1);
 		glVertex2f(_constrainedMDS[i*2], _constrainedMDS[i*2+1]);
 	}
 	glEnd();

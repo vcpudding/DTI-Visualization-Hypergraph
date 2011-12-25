@@ -186,7 +186,8 @@ void FiberData::drawFibers()
 		glBegin(GL_LINE_STRIP);
 		for (int j=1; j<=_fibers[i][0](0); ++j)
 		{
-			setFiberColor(i,j);
+			const uchar* col = getFiberColor(i,j);
+			glColor4ubv(col);
 			glVertex3fv(_fibers[i][j].memptr());
 		}
 		glEnd();
@@ -198,65 +199,16 @@ void FiberData::drawFibers()
 
 void FiberData::drawFibersAsTubes( float radius )
 {
-	glEnable(GL_DEPTH_TEST);
-
-	const int N_CIRCLE_PTS = 20;
-	vector<float> circlePts (N_CIRCLE_PTS*2);
-	for (int i=0; i<N_CIRCLE_PTS; ++i)
+	if (_fiberDrawList==0)
 	{
-		circlePts[i*2] = radius*cos(i*2.0F*radius/N_CIRCLE_PTS);
+		genFiberDispListAsTube(0.3);
 	}
-
 	glPushMatrix();
 	glTranslatef(-_sizeX*_volSizeX/2, -_sizeY*_volSizeY/2, -_sizeZ*_volSizeZ/2);
-	for(int i=0; i<_nFibers; ++i)
+	for (int i=0; i<_nFibers; ++i)
 	{
-		glPushName(i);
-		vector<FloatPoint> tangent (_fibers[i][0](0)+1);
-		vector<FloatPoint> normal (_fibers[i][0](0)+1);
-		vector<FloatPoint> binormal (_fibers[i][0](0)+1);
-
-		for (int j=1; j<=_fibers[i][0](0); ++j)
-		{
-			if (j==1)
-			{
-				tangent[j] = _fibers[i][j+1]-_fibers[i][j];
-			} else if (j == _fibers[i][0](0))
-			{
-				tangent[j] = _fibers[i][j]-_fibers[i][j-1];
-			} else
-			{
-				tangent[j] = (_fibers[i][j+1]-_fibers[i][j-1])/2;
-			}
-			tangent[j] /= norm_2(tangent[j]);
-		}
-
-		for (int j=1; j<=_fibers[i][0](0); ++j)
-		{
-			if (j==1)
-			{
-				normal[j] = tangent[j+1]-tangent[j];
-			} else if (j == _fibers[i][0](0))
-			{
-				normal[j] = tangent[j]-tangent[j-1];
-			} else
-			{
-				normal[j] = (tangent[j+1]-tangent[j-1])/2;
-			}
-			normal[j] /= norm_2(normal[j]);
-			binormal[j] = cross(tangent[j], normal[j]);
-		}
-
-		glBegin(GL_LINE_STRIP);
-		for (int j=1; j<=_fibers[i][0](0); ++j)
-		{
-			setFiberColor(i,j);
-			glVertex3fv(_fibers[i][j].memptr());
-		}
-		glEnd();
-		glPopName();
+		glCallList(_fiberDrawList+i);
 	}
-
 	glPopMatrix();
 }
 
@@ -308,7 +260,7 @@ void FiberData::drawMatchings()
 			glBegin(GL_LINES);
 			for (int j=1; j<=_fibers[i][0](0); ++j)
 			{
-				setFiberColor(i,j);
+				//setFiberColor(i,j);
 				glVertex3fv(_fibers[i][j].memptr());
 				float c = matching[j]*0.5/_clusterCenters[clusterIdx][0](0)+0.5;
 				glColor3f(c,c,c);
@@ -335,7 +287,7 @@ void FiberData::genFiberDispList()
 		glBegin(GL_LINE_STRIP);
 		for (int j=1; j<=_fibers[i][0](0); ++j)
 		{
-			setFiberColor(i,j);
+			//setFiberColor(i,j);
 			glVertex3fv(_fibers[i][j].memptr());
 		}
 		glEnd();
@@ -343,7 +295,38 @@ void FiberData::genFiberDispList()
 	}
 }
 
-void FiberData::setFiberColor(int fibIndex, int ptIndex, float alpha)
+void FiberData::genFiberDispListAsTube(float radius)
+{
+	glDeleteLists(_fiberDrawList, _nFibers);
+	_fiberDrawList = glGenLists(_nFibers);
+
+	glEnable(GL_LIGHTING);
+	glEnable(GL_DEPTH_TEST);
+	gleDouble ptBuf [200][3];
+	float colBuf [200][3];
+
+	for (int i=0; i<_nFibers; ++i)
+	{
+		glNewList(_fiberDrawList+i, GL_COMPILE);
+		int nPoints = _fibers[i][0](0);
+		for (int j=0; j<nPoints; ++j)
+		{
+			ptBuf[j][0] = _fibers[i][j+1](0);
+			ptBuf[j][1] = _fibers[i][j+1](1);
+			ptBuf[j][2] = _fibers[i][j+1](2);
+
+			const uchar* col = getFiberColor(i,j+1);
+			colBuf[j][0] = col[0]/255.0f;
+			colBuf[j][1] = col[1]/255.0f;
+			colBuf[j][2] = col[2]/255.0f;
+		}
+
+		glePolyCylinder (nPoints, ptBuf, colBuf, radius);
+		glEndList();
+	}
+}
+
+const uchar* FiberData::getFiberColor(int fibIndex, int ptIndex, float alpha)
 {
 	uchar *col;
 	FloatPoint dirVec;
@@ -357,26 +340,43 @@ void FiberData::setFiberColor(int fibIndex, int ptIndex, float alpha)
 		alpha = _selectedBuf[fibIndex]?1.0:0.6;
 		dirVec = ptIndex==1?_fibers[fibIndex][ptIndex+1]-_fibers[fibIndex][ptIndex]:_fibers[fibIndex][ptIndex]-_fibers[fibIndex][ptIndex-1];
 		dirVec /= norm(dirVec,2);
-		glColor4f(fabs(dirVec[0])*alpha, fabs(dirVec[1])*alpha, fabs(dirVec[2])*alpha, alpha);
+		//glColor4f(fabs(dirVec[0])*alpha, fabs(dirVec[1])*alpha, fabs(dirVec[2])*alpha, alpha);
+		_fibColBuf[0] = fabs(dirVec[0])*alpha*255;
+		_fibColBuf[1] = fabs(dirVec[1])*alpha*255;
+		_fibColBuf[2] = fabs(dirVec[2])*alpha*255;
+		_fibColBuf[3] = alpha*255;
 		break;
 	case COLOR_CLUSTER:
 		clusterIdx = _clusters[fibIndex];
 		alpha = _selectedBuf[fibIndex]?1.0:0.3;
 		if (clusterIdx<0)
 		{
-			glColor4ub(125*alpha, 125*alpha, 125*alpha, alpha*255);
+			_fibColBuf[0] = alpha*255;
+			_fibColBuf[1] = alpha*255;
+			_fibColBuf[2] = alpha*255;
+			_fibColBuf[3] = alpha*255;
 		} else
 		{
 			col = _clusterColorer->getColor(clusterIdx);
-			glColor4ub(col[0]*alpha, col[1]*alpha, col[2]*alpha, alpha*255);
+			_fibColBuf[0] = col[0]*alpha;
+			_fibColBuf[1] = col[1]*alpha;
+			_fibColBuf[2] = col[2]*alpha;
+			_fibColBuf[3] = alpha*255;
 		}
 		break;
 	case COLOR_ATLAS_CLUSTER:
 		col = TemplateFiberData::getTplColor(_clusters[fibIndex]);
-		glColor4ub(col[0], col[1], col[2], alpha*255);
+		_fibColBuf[0] = col[0];
+		_fibColBuf[1] = col[1];
+		_fibColBuf[2] = col[2];
+		_fibColBuf[3] = alpha*255;
+
 		break;
-	case COLOR_SEED:
 		glColor4f(0.8,0.5,0.5, alpha);
+		_fibColBuf[0] = 255;
+		_fibColBuf[1] = 180;
+		_fibColBuf[2] = 180;
+		_fibColBuf[3] = alpha*255;
 		break;
 	case COLOR_TC:
 		if (ptIndex>1)
@@ -389,8 +389,13 @@ void FiberData::setFiberColor(int fibIndex, int ptIndex, float alpha)
 		t2(2) /= _sizeZ*1.0/_sizeX;
 		lambda = 1.0/sqrt(dot(t1, t2));
 		glColor4f(lambda*sqrt(t1(0)*t2(0)), lambda*sqrt(t1(1)*t2(1)), lambda*sqrt(t1(2)*t2(2)), alpha);
+		_fibColBuf[0] = lambda*sqrt(t1(0)*t2(0))*255;
+		_fibColBuf[1] = lambda*sqrt(t1(1)*t2(1))*255;
+		_fibColBuf[2] = lambda*sqrt(t1(2)*t2(2))*255;
+		_fibColBuf[3] = alpha*255;
 		break;
 	}
+	return _fibColBuf;
 }
 
 unsigned FiberData::loadFibers(const QString &fileName, int sizeX, int sizeY, int sizeZ)
@@ -613,7 +618,7 @@ void FiberData::drawEmbeddings(int type, float minDistThres)
 			}
 		} else
 		{
-			setFiberColor(i, 1, 0.1);
+			//setFiberColor(i, 1, 0.1);
 		}
 
 		glPushMatrix();

@@ -76,6 +76,7 @@ public:
 	vector<double>		_fuzzyClusters;
 	int					_nClusters;
 	vector<vector<Link> >	_matchings;
+	uchar				_fibColBuf [4];
 
 public:
 	void				fiberTracking (SeedData * seedData, TensorData * tensorData, const TrackingConfig & config);
@@ -88,7 +89,8 @@ public:
 	void				drawClusterCenters ();
 	void				drawMatchings ();
 	void				genFiberDispList();
-	void				setFiberColor (int fibIndex, int ptIndex, float alpha=1);
+	void				genFiberDispListAsTube(float radius=0.3);
+	const uchar *		getFiberColor (int fibIndex, int ptIndex, float alpha=1);
 	void				drawEmbeddings (int type = 0, float minDistThres = 30);
 	void				setFiberThickness (float thk) {_fiberThickness = thk;}
 	void				setColorMode (int clrMode);

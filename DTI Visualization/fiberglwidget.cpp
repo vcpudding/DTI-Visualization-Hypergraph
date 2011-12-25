@@ -60,22 +60,23 @@ void FiberGLWidget::initializeGL()
 	//Enable Lighting
 	//glEnable(GL_LIGHTING);
 
-	////Specify a single directional light
-	//float color_intensity=0.8;
-	//GLfloat light_color[] = { color_intensity,color_intensity,color_intensity,1.0};
-	////GLfloat light_color[] = { 1.0f,1.0f,1.0f,1.0f};
-	//GLfloat light_pos[] = { 1.0f,1.0f,1.0f,0.0f};
+	//Specify a single directional light
+	float color_intensity=0.8;
+	GLfloat light_pos[] = { 1.0f,1.0f,0.0f,0.0f};
+	GLfloat light_dark_color [] = {0,0,0,1};
+	GLfloat light_bright_color [] = {1,1,1,1};
 
-	//glLightfv(GL_LIGHT0, GL_AMBIENT, light_color);
-	//glLightfv(GL_LIGHT0, GL_DIFFUSE, light_color);
-	//glLightfv(GL_LIGHT0, GL_SPECULAR, light_color);
-	//glLightfv(GL_LIGHT0, GL_POSITION, light_pos);	
+	glLightfv(GL_LIGHT0, GL_AMBIENT, light_dark_color);
+	glLightfv(GL_LIGHT0, GL_DIFFUSE, light_bright_color);
+	glLightfv(GL_LIGHT0, GL_SPECULAR, light_bright_color);
+	glLightfv(GL_LIGHT0, GL_POSITION, light_pos);	
 
-	//glEnable(GL_LIGHT0);
-	//glHint(GL_PERSPECTIVE_CORRECTION_HINT,GL_NICEST);
-	//glColorMaterial(GL_FRONT,GL_AMBIENT_AND_DIFFUSE);
-	//glEnable(GL_COLOR_MATERIAL);
-	//glDisable(GL_LIGHTING);
+	glEnable(GL_LIGHT0);
+	glEnable(GL_COLOR_MATERIAL);
+	glColorMaterial(GL_FRONT_AND_BACK,GL_AMBIENT_AND_DIFFUSE);
+	glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, light_dark_color);
+	glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, light_dark_color);
+	glDisable(GL_LIGHTING);
 }
 
 void FiberGLWidget::resizeGL(int w, int h)
@@ -127,7 +128,8 @@ void FiberGLWidget::paintGL()
 		switch (_dispMode)
 		{
 		case DISP_FIBERS:
-			_fiberData->drawFibers();
+			//_fiberData->drawFibers();
+			_fiberData->drawFibersAsTubes(0.3);
 			break;
 		case DISP_CLUSTER_CENTERS:
 			_fiberData->drawClusterCenters();

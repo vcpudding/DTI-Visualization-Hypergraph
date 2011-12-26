@@ -3139,3 +3139,45 @@ void FiberData::clusterAFCC(int maxNumOfClusters, const vector<int> &seedBuf)
 		}*/
 	}
 }
+
+void FiberData::getPairwiseConstraints(const vector<int> &selectedIdx, int clusterIdx, vector<int> &mustLink, vector<int> &cannotLink)
+{
+	vector<int> repFibers (_nClusters);
+	
+	getMatchings(_matchings);
+	for (int i=0; i<_nClusters; ++i)
+	{
+		float minDist = 1.0e5;
+		for (int j=0; j<_nFibers; ++j)
+		{
+			float d = fibDistMadah(_fibers[j], _clusterCenters[i], _matchings[j][i], _clusterCovs[i]);
+			if (d<minDist)
+			{
+				minDist = d;
+				repFibers[i] = j;
+			}
+		}
+	}
+
+	for (int i=0; i<selectedIdx.size(); ++i)
+	{
+		for (int j=0; j<i; ++j)
+		{
+			mustLink.push_back(selectedIdx[i]);
+			mustLink.push_back(selectedIdx[j]);
+		}
+
+		for (int j=0; j<_nClusters; ++j)
+		{
+			if (j==clusterIdx)
+			{
+				mustLink.push_back(selectedIdx[i]);
+				mustLink.push_back(repFibers[j]);
+			} else
+			{
+				cannotLink.push_back(selectedIdx[i]);
+				cannotLink.push_back(repFibers[j]);
+			}
+		}
+	}
+}

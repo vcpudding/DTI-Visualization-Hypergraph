@@ -166,6 +166,7 @@ public:
 	double				getAlpha (double x);
 	double				getGammaFunc (double d, double alpha, double beta);
 	double				getCostAlpha (double alpha, double sumPik, double sumDist, double sumLogDist);
+	void				getPairwiseConstraints (const vector<int> &selectedIdx, int clusterIdx, vector<int> &mustLink, vector<int> &cannotLink);
 };
 
 float * getDistMatrixGPU (FiberData *fibData1, FiberData *fibData2);

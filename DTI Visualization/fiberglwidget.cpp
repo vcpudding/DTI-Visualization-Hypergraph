@@ -128,8 +128,8 @@ void FiberGLWidget::paintGL()
 		switch (_dispMode)
 		{
 		case DISP_FIBERS:
-			//_fiberData->drawFibers();
-			_fiberData->drawFibersAsTubes(0.3);
+			_fiberData->drawFibers();
+			//_fiberData->drawFibersAsTubes(0.3);
 			break;
 		case DISP_CLUSTER_CENTERS:
 			_fiberData->drawClusterCenters();
@@ -609,9 +609,12 @@ void FiberGLWidget::handleClustersChanged(const vector<int> &clusters)
 
 void FiberGLWidget::handleAssignClusters(int clusterIdx)
 {
-	_fiberData->assignSelectedToCluster(clusterIdx);
-	_fiberData->clusterFuzzyCMeans(true, vector<int>(), 1);
-	_fiberData->getClustersFromFuzzyClusters();
+	//_fiberData->assignSelectedToCluster(clusterIdx);
+	//_fiberData->clusterFuzzyCMeans(true, vector<int>(), 1);
+	//_fiberData->getClustersFromFuzzyClusters();
+	vector<int> mustLink, cannotLink;
+	_fiberData->getPairwiseConstraints(clusterIdx, mustLink, cannotLink);
+	_fiberData->clusterAFCC(100, vector<int>(), mustLink, cannotLink, true);
 	emit clustersChanged(_fiberData->getClusters());
 
 	Hypergraph *g = _fiberData->getGraphFuzzyCMeans();

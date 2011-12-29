@@ -18,8 +18,8 @@ TractVisualization::TractVisualization(QWidget *parent)
 	: QMainWindow(parent)
 {
 	ui.setupUi(this);
-	TEST_DATA_PATH = "D:\\Stella\\Research\\Sample data\\test data\\hypergraph\\";
-	//TEST_DATA_PATH = "D:\\Study\\Hypergraph\\hypergraph test data\\";
+	//TEST_DATA_PATH = "D:\\Stella\\Research\\Sample data\\test data\\hypergraph\\";
+	TEST_DATA_PATH = "D:\\Study\\Hypergraph\\hypergraph test data\\";
 
 	_fiberActionGroup = new QActionGroup(this);
 	_fiberActionGroup->addAction(ui.actionRotation);
@@ -198,74 +198,9 @@ void makeTestTracts ()
 
 void TractVisualization::handleTest()
 {
-	_fibData->loadFibersFromTrk("D:\\Stella\\Research\\Sample data\\test data\\hypergraph\\whole brain tracks test.trk");
-	//_fibData->loadFuzzyClusters("D:\\Stella\\Research\\Sample data\\test data\\hypergraph\\whole brain cluster.fuz");
+	//_fibData->loadFibersFromTrk(QString("%1labeled.trk").arg(TEST_DATA_PATH));
+	_fibData->loadFibersFromTrk(QString("%1whole brain tracks test.trk").arg(TEST_DATA_PATH));
 	//_fibData->loadFibersFromTrk("D:\\Stella\\Research\\Sample data\\test data\\hypergraph\\labeled.trk");
-
-	/*_fibData->resampleEqualSample(15);
-	vector<int> matching1;
-	float dist1 = fibDistDTWCov(_fibData->fiber(4), _fibData->fiber(45), 10, matching1);
-	vector<int> matching2;
-	float dist2 = fibDistDTWCov(_fibData->fiber(4), _fibData->fiber(277), 10, matching2);
-
-	ArrFiber tmpFiber = new FloatPoint[16];
-	for (int i=0; i<16; ++i)
-	{
-		tmpFiber[i] = i==0?_fibData->fiber(4)[0]:_fibData->fiber(4)[16-i];
-	}
-
-	vector<int> matching3;
-	float dist3 = fibDistDTWCov(tmpFiber, _fibData->fiber(45), 10, matching3);
-
-	vector<int> matching4;
-	float dist4 = fibDistDTWCov(tmpFiber, _fibData->fiber(277), 10, matching4);
-
-	ofstream logFile ("log.txt");
-	logFile <<"Fiber #4 => Center #0: " <<dist1 <<endl;
-
-	float d = 0;
-	for (int i=1; i<=15; ++i)
-	{
-		FloatPoint & pt1 = _fibData->fiber(4)[i];
-		FloatPoint & pt2 = _fibData->fiber(45)[matching1[i]];
-		logFile <<"\t(" <<pt1(0) <<"," <<pt1(1) <<"," <<pt1(2) <<")=>(" <<pt2(0) <<"," <<pt2(1) <<"," <<pt2(2) <<"): " <<norm(pt1-pt2, 2) <<endl;
-		d+=norm(pt1-pt2, 2);
-	}
-	logFile <<"\tSum matched distance: " <<d <<endl;
-
-	d=0;
-	logFile <<"Fiber #4 => Center #1: " <<dist2 <<endl;
-	for (int i=1; i<=15; ++i)
-	{
-		FloatPoint & pt1 = _fibData->fiber(4)[i];
-		FloatPoint & pt2 = _fibData->fiber(277)[matching2[i]];
-		logFile <<"\t(" <<pt1(0) <<"," <<pt1(1) <<"," <<pt1(2) <<")=>(" <<pt2(0) <<"," <<pt2(1) <<"," <<pt2(2) <<"): " <<norm(pt1-pt2, 2) <<endl;
-		d+=norm(pt1-pt2, 2);
-	}
-	logFile <<"\tSum matched distance: " <<d <<endl;
-
-	d=0;
-	logFile <<"Fiber #4 inverse => Center #0: " <<dist3 <<endl;
-	for (int i=1; i<=15; ++i)
-	{
-		FloatPoint & pt1 = tmpFiber[i];
-		FloatPoint & pt2 = _fibData->fiber(45)[matching3[i]];
-		logFile <<"\t(" <<pt1(0) <<"," <<pt1(1) <<"," <<pt1(2) <<")=>(" <<pt2(0) <<"," <<pt2(1) <<"," <<pt2(2) <<"): " <<norm(pt1-pt2, 2) <<endl;
-		d+=norm(pt1-pt2, 2);
-	}
-	logFile <<"\tSum matched distance: " <<d <<endl;
-
-	d=0;
-	logFile <<"Fiber #4 inverse => Center #1: " <<dist4 <<endl;
-	for (int i=1; i<=15; ++i)
-	{
-		FloatPoint & pt1 = tmpFiber[i];
-		FloatPoint & pt2 = _fibData->fiber(277)[matching4[i]];
-		logFile <<"\t(" <<pt1(0) <<"," <<pt1(1) <<"," <<pt1(2) <<")=>(" <<pt2(0) <<"," <<pt2(1) <<"," <<pt2(2) <<"): " <<norm(pt1-pt2, 2) <<endl;
-		d+=norm(pt1-pt2, 2);
-	}
-	logFile <<"\tSum matched distance: " <<d <<endl;
-	logFile.close();*/
 
 	//_fibData->loadFuzzyClusters("D:\\Stella\\Research\\Sample data\\test data\\hypergraph\\labeled fuzzy cluster.fuz");
 	//int seeds [5] = {45, 277, 556, 666, 928};
@@ -279,12 +214,12 @@ void TractVisualization::handleTest()
 	//_fibData->saveFuzzyClusters("D:\\Stella\\Research\\Sample data\\test data\\hypergraph\\whole brain cluster.fuz");
 	//_fibData->saveFuzzyClusters("D:\\Stella\\Research\\Sample data\\test data\\hypergraph\\labeled fuzzy cluster.fuz");
 	//_fibData->saveFuzzyClusters("D:\\Stella\\Research\\Sample data\\test data\\hypergraph\\whole brain test cluster.fuz");
-	//handleGetGraphFuzzyCMeans();
-	//handleLayoutPartitioned();
-	//_graph->loadLayout("D:\\Stella\\Research\\Sample data\\test data\\hypergraph\\labeled fuzzy layout.dat");
+	handleGetGraphFuzzyCMeans();
+	handleLayoutPartitioned();
+	//_graph->loadLayout(QString("%1whole brain test hypergraph.dat").arg(TEST_DATA_PATH));
 	_graph->setClusters(_fibData->getClusters());
 	_graph->setClusterColorer(_fibData->getClusterColorer());
-	//handleCompoundWin();
+	handleCompoundWin();
 	//_fibData->loadFibers("D:\\Stella\\Research\\Sample data\\test data\\hypergraph\\test tracts.txt", 30, 30, 30);
 	//handleFiberWin();
 	//int seeds [] = {5,15,25};

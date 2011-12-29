@@ -2351,45 +2351,14 @@ void FiberData::clusterFuzzyCMeans(bool bUpdate, const vector<int> &seedBuf, int
 {
 	if (!bUpdate)
 	{
-		_nClusters = seedBuf.size();
-		if (seedBuf.empty())
-		{
-			return;
-		}
+		initClusters(seedBuf.size(), seedBuf);
 
-		_fuzzyClusters.resize(_nClusters*_nFibers);
 		_paramAlpha.resize(_nClusters);
 		_paramBeta.resize(_nClusters);
 		_paramW.resize(_nClusters);
-		_clusterCovs.resize(_nClusters);
-
 		_paramAlpha.assign(_nClusters, 1.0);
 		_paramBeta.assign(_nClusters, 10);
 		_paramW.assign(_nClusters, 1.0f/_nClusters);
-
-		int nDim = 30;
-		resampleEqualSample(nDim);
-		for (int i=0; i<_nClusters; ++i)
-		{
-			_clusterCovs[i].resize(nDim+1);
-			for (int j=0; j<=nDim; ++j)
-			{
-				_clusterCovs[i][j]<<1<<0<<0<<endr<<0<<1<<0<<endr<<0<<0<<1<<endr;
-			}
-		}
-
-		/*initiate cluster centers*/
-		_clusterCenters.resize(_nClusters);
-		for (int i=0; i<_nClusters; ++i)
-		{
-			_clusterCenters[i] = new FloatPoint[nDim+1];
-			for (int j=0; j<=nDim; ++j)
-			{
-				_clusterCenters[i][j] = _fibers[seedBuf[i]][j];
-			}
-
-		}
-		initClusterColor();
 	} else
 	{
 		updateClusterCentersFuzzy(_matchings);
@@ -3022,10 +2991,10 @@ void FiberData::updateClusterCentersFuzzyDTW()
 	updateClusterCentersFuzzy(matchings);
 }
 
-void FiberData::clusterAFCC(int maxNumOfClusters, const vector<int> &seedBuf)
+void FiberData::initClusters(int nClusters, const vector<int> &seedBuf)
 {
 	_clusters.assign(_nFibers, 0);
-	_nClusters = maxNumOfClusters;
+	_nClusters = nClusters;
 	_fuzzyClusters.resize(_nFibers*_nClusters);
 	_fuzzyClusters.assign(_fuzzyClusters.size(), 1.0/_nClusters);
 
@@ -3075,9 +3044,17 @@ void FiberData::clusterAFCC(int maxNumOfClusters, const vector<int> &seedBuf)
 		}
 	}
 	initClusterColor();
+}
+
+void FiberData::clusterAFCC(int maxNumOfClusters, const vector<int> &seedBuf, const vector<int> &mustLink, const vector<int> &cannotLink, bool bUpdate)
+{
+	if (!bUpdate)
+	{
+		initClusters(maxNumOfClusters, seedBuf);
+	}
 	
-	vector<double> clusterCards (_nClusters);
-	clusterCards.assign(_nClusters, _nFibers*1.0/_nClusters);
+	//vector<double> clusterCards (_nClusters);
+	//clusterCards.assign(_nClusters, _nFibers*1.0/_nClusters);
 
 	double cost = 10000;
 	double lastCost = 0;
@@ -3086,34 +3063,118 @@ void FiberData::clusterAFCC(int maxNumOfClusters, const vector<int> &seedBuf)
 	//double tau = 1.0;
 	int nIt = 0;
 	double maxDiffMembership = 1.0;
-	while (maxDiffMembership>1.0e-1 && fabs((cost-lastCost)/lastCost)>1.0e-3 && nIt<100)
+	vector<float> distBuf (_nFibers*_nClusters);
+	vector<float> constBuf (_nFibers*_nClusters);
+	vector<double> oldMembership (_nFibers*_nClusters);
+	while (maxDiffMembership>1.0e-1/* && fabs((cost-lastCost)/lastCost)>1.0e-3*/ && nIt<100)
 	{
 		lastCost = cost;
 		maxDiffMembership = 0;
 
-		vector<float> distBuf (_nFibers*_nClusters);
 		getMatchings(_matchings);
-
 		for (int i=0; i<_nFibers; ++i)
 		{
-			vector<double> oldMembership (_nClusters);
-			oldMembership.assign(_fuzzyClusters.begin()+_nClusters*i, _fuzzyClusters.begin()+_nClusters*(i+1));
-			float sumInvSqrDist = 0;
 			for (int j=0; j<_nClusters; ++j)
 			{
 				float d = fibDistMadah(_fibers[i], _clusterCenters[j], _matchings[i][j], _clusterCovs[j]);
 				distBuf[i*_nClusters+j] = d;
-				_fuzzyClusters[i*_nClusters+j] = 1/(d*d+1.0e-6);
-				sumInvSqrDist += _fuzzyClusters[i*_nClusters+j]; 
+			}
+		}
+
+		int nConstraints = mustLink.size()/2+cannotLink.size()/2;
+		float alpha;
+		if (nConstraints==0)
+		{
+			alpha = 0;
+		} else
+		{
+			float alphaNumer = 0, alphaDenom = 0;
+			for (int i=0; i<_nFibers*_nClusters; ++i)
+			{
+				alphaNumer += pow(_fuzzyClusters[i]*distBuf[i], 2);
+				alphaDenom += _fuzzyClusters[i]*_fuzzyClusters[i];
+			}
+			alpha = sqrt(alphaNumer/alphaDenom)*_nFibers/nConstraints;
+		}
+
+		oldMembership.assign(_fuzzyClusters.begin(), _fuzzyClusters.end());
+
+		constBuf.assign(constBuf.size(), 0);
+		for (int i=0; i<_nFibers; ++i)
+		{
+			for (int j=0; j<_nClusters; ++j)
+			{
+				for (int k=0; k<mustLink.size()/2; ++k)
+				{
+					if (mustLink[2*k]==i||mustLink[2*k+1]==i)
+					{
+						int idx = mustLink[2*k]==i?mustLink[2*k+1]:mustLink[2*k];
+						for (int l=0; l<_nClusters; ++l)
+						{
+							if (l!=j)
+							{
+								constBuf[i*_nClusters+j] += _fuzzyClusters[idx*_nClusters+l];
+							}
+						}
+					}
+				}
+
+				for (int k=0; k<cannotLink.size()/2; ++k)
+				{
+					if (cannotLink[2*k]==i||cannotLink[2*k+1]==i)
+					{
+						int idx = cannotLink[2*k]==i?cannotLink[2*k+1]:cannotLink[2*k];
+						constBuf[i*_nClusters+j] += _fuzzyClusters[idx*_nClusters+j];
+					}
+				}
+			}
+		}
+
+		for (int i=0; i<_nFibers; ++i)
+		{
+			float sumInvSqrDist = 0;
+			float Cvr = 0;
+			for (int j=0; j<_nClusters; ++j)
+			{
+				float d = distBuf[i*_nClusters+j];
+				sumInvSqrDist += 1.0f/(d*d+1.0e-6);
+				Cvr += constBuf[i*_nClusters+j]/(d*d+1.0e-6);
+			}
+			Cvr /= sumInvSqrDist;
+
+			float sumProb = 0;
+			for (int j=0; j<_nClusters; ++j)
+			{
+				float d = distBuf[i*_nClusters+j];
+				float uFCM = 1/(d*d+1.0e-6)/sumInvSqrDist;
+				float uConstraints = alpha/2.0f*(Cvr-constBuf[i*_nClusters+j])/(d*d+1.0e-6);
+				_fuzzyClusters[i*_nClusters+j] = uFCM+uConstraints;
+
+				if (_fuzzyClusters[i*_nClusters+j]<0)
+				{
+					float p = _fuzzyClusters[i*_nClusters+j];
+					_fuzzyClusters[i*_nClusters+j]=0;
+					int stop = 1;
+				}
+				sumProb += _fuzzyClusters[i*_nClusters+j];
+
+
 			}
 
 			for (int j=0; j<_nClusters; ++j)
 			{
-				_fuzzyClusters[i*_nClusters+j] /= sumInvSqrDist;
-				if (fabs(_fuzzyClusters[i*_nClusters+j]-oldMembership[j])>maxDiffMembership)
+				_fuzzyClusters[i*_nClusters+j] /= sumProb;
+
+				if (fabs(_fuzzyClusters[i*_nClusters+j]-oldMembership[i*_nClusters+j])>maxDiffMembership)
 				{
-					maxDiffMembership = fabs(_fuzzyClusters[i*_nClusters+j]-oldMembership[j]);
+					maxDiffMembership = fabs(_fuzzyClusters[i*_nClusters+j]-oldMembership[i*_nClusters+j]);
 				}
+			}
+
+			if (sumProb!=1.0)
+			{
+				float sumProb1 = sumProb/alpha;
+				int stop = 1;
 			}
 		}
 
@@ -3140,7 +3201,7 @@ void FiberData::clusterAFCC(int maxNumOfClusters, const vector<int> &seedBuf)
 	}
 }
 
-void FiberData::getPairwiseConstraints(const vector<int> &selectedIdx, int clusterIdx, vector<int> &mustLink, vector<int> &cannotLink)
+void FiberData::getPairwiseConstraints(int clusterIdx, vector<int> &mustLink, vector<int> &cannotLink)
 {
 	vector<int> repFibers (_nClusters);
 	
@@ -3159,24 +3220,30 @@ void FiberData::getPairwiseConstraints(const vector<int> &selectedIdx, int clust
 		}
 	}
 
-	for (int i=0; i<selectedIdx.size(); ++i)
+	for (int i=0; i<_nFibers; ++i)
 	{
-		for (int j=0; j<i; ++j)
+		if (_selectedBuf[i])
 		{
-			mustLink.push_back(selectedIdx[i]);
-			mustLink.push_back(selectedIdx[j]);
-		}
+			for (int j=0; j<i; ++j)
+			{
+				if (_selectedBuf[j])
+				{
+					mustLink.push_back(i);
+					mustLink.push_back(j);
+				}
+			}
 
-		for (int j=0; j<_nClusters; ++j)
-		{
-			if (j==clusterIdx)
+			for (int j=0; j<_nClusters; ++j)
 			{
-				mustLink.push_back(selectedIdx[i]);
-				mustLink.push_back(repFibers[j]);
-			} else
-			{
-				cannotLink.push_back(selectedIdx[i]);
-				cannotLink.push_back(repFibers[j]);
+				if (j==clusterIdx)
+				{
+					mustLink.push_back(i);
+					mustLink.push_back(repFibers[j]);
+				} else
+				{
+					cannotLink.push_back(i);
+					cannotLink.push_back(repFibers[j]);
+				}
 			}
 		}
 	}
